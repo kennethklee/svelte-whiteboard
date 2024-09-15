@@ -16,4 +16,16 @@ export class Fragment {
   to(point) {
     throw new Error('Not implemented')
   }
+
+  /** @returns {string} */
+  static serialize() {
+    throw new Error('Not implemented')
+  }
+  /**
+   * @param {string} data
+   * @returns {Fragment}
+   */
+  static deserialize(data) {
+    throw new Error('Not implemented')
+  }
 }

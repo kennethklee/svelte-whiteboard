@@ -26,7 +26,6 @@
     screenEl.addEventListener('mousedown', ev => drawStart(...getXY(ev)))
     screenEl.addEventListener('mousemove', ev => drawMove(...getXY(ev)))
     screenEl.addEventListener('mouseup', drawEnd)
-    screenEl.addEventListener('mouseleave', drawEnd)
     screenEl.addEventListener('mouseleave', drawCancel)
 
     draw(ctx)
