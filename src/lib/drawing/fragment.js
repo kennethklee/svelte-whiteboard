@@ -1,7 +1,6 @@
 /** @typedef {[number, number]} Point */
 
 export class Fragment {
-
   /** @param {number} delta milliseconds since last frame */
   update(delta) {
     throw new Error('Not implemented')
@@ -17,15 +16,15 @@ export class Fragment {
     throw new Error('Not implemented')
   }
 
-  /** @returns {string} */
-  static serialize() {
+  /** @returns {any} */
+  toJSON() {
     throw new Error('Not implemented')
   }
   /**
-   * @param {string} data
+   * @param {any} data
    * @returns {Fragment}
    */
-  static deserialize(data) {
+  static fromJSON(data) {
     throw new Error('Not implemented')
   }
 }

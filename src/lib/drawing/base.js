@@ -10,6 +10,7 @@ export class Base extends Fragment {
     this.width = this.canvas.width = w || this.width
     this.height = this.canvas.height = h || this.height
     this.ctx = this.canvas.getContext('2d')
+    if (!this.ctx) throw new Error('Could not get base 2d context')
   }
 
   render(ctx) {
@@ -19,5 +20,21 @@ export class Base extends Fragment {
   /** @param {Fragment} frag */
   eat(frag) {
     frag.render(this.ctx)
+  }
+
+  toJSON() {
+    return {
+      type: 'base',
+      width: this.width,
+      height: this.height,
+      blob: this.canvas.toDataURL('image/png'),
+    }
+  }
+  static fromJSON(data) {
+    const base = new Base(data.width, data.height)
+    var img = new Image()
+    img.onload = () => base.ctx.drawImage(img, 0, 0)
+    img.src = data.blob
+    return base
   }
 }

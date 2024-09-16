@@ -9,6 +9,7 @@ export class Path extends Fragment {
     super()
     this.point = point
     this.path = path
+    this.colour = colour
   }
 
   update() {}
@@ -24,6 +25,21 @@ export class Path extends Fragment {
   }
 
   to(point) {
+    const lastPoint = this.path[this.path.length - 1]
+    if (lastPoint && lastPoint[0] === point[0] && lastPoint[1] === point[1]) return
     this.path.push(point)
   }
+
+  toJSON() {
+    return {
+      type: 'path',
+      point: this.point,
+      path: this.path,
+      colour: this.colour
+    }
+  }
+  static fromJSON(data) {
+    return new Path(data.point, data.path, data.colour)
+  }
+
 }

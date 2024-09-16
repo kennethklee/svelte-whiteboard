@@ -9,6 +9,7 @@ export class Line extends Fragment {
     super()
     this.point = point
     this.toPoint = toPoint
+    this.colour = colour
   }
 
   update() {}
@@ -24,5 +25,17 @@ export class Line extends Fragment {
 
   to(point) {
     this.toPoint = point
+  }
+
+  toJSON() {
+    return {
+      type: 'line',
+      point: this.point,
+      toPoint: this.toPoint,
+      colour: this.colour
+    }
+  }
+  static fromJSON(data) {
+    return new Line(data.point, data.toPoint, data.colour)
   }
 }

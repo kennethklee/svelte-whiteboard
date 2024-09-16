@@ -15,15 +15,13 @@ export class Grid extends Fragment {
     this.canvas.height = 50
 
     const ctx = this.canvas.getContext('2d')
-    if (!ctx) throw new Error('Could not get 2d context')
+    if (!ctx) throw new Error('Could not get grid 2d context')
 
-    // draw top and left lines
-    ctx.setLineDash([5])
+    ctx.fillStyle = '#ddd'
     ctx.beginPath()
-    ctx.moveTo(0, 50)
-    ctx.lineTo(50, 50)
-    ctx.lineTo(50, 0)
-    ctx.stroke()
+    ctx.rect(25, 0, 25, 25)
+    ctx.rect(0, 25, 25, 25)
+    ctx.fill()
   }
 
   /** @param {CanvasRenderingContext2D} ctx Canvas 2d context */
