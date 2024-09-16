@@ -7,15 +7,18 @@
   import { Path } from '$lib/drawing/path';
   import { Shape } from '$lib/drawing/shape';
 
-  const width = 400
-  const height = 400
+  const width = 550
+  const height = 550
+  const STACK_SIZE = 10
 
   let grid
   let base
   let cursor = 0 // position in stack
   const stack = []
   
+  // This translates screen coords to canvas coords -- for simplicity, they are the same
   const getXY = (e) => ([e.pageX - screenEl.offsetLeft, e.pageY - screenEl.offsetTop])
+
   onMount(() => {
     base = new Base(width, height)
     grid = new Grid(width, height)
@@ -28,6 +31,7 @@
     screenEl.addEventListener('mouseup', drawEnd)
     screenEl.addEventListener('mouseleave', drawCancel)
 
+    // normally you draw to a in-memory canvas, then copy to the screen with pan/zoom details
     draw(ctx)
   })
 
@@ -57,6 +61,11 @@
     if (!tool) return
     stack.splice(cursor)
     stack.push(tool)
+
+    if (stack.length > STACK_SIZE) {
+      const frag = stack.shift()
+      base.eat(frag)
+    }
     cursor = stack.length
     drawCancel()
   }
@@ -83,14 +92,12 @@
   }
 
   function undo() {
-    cursor--
+    cursor = Math.max(0, cursor - 1)
     changes = true
-    console.log('undo', cursor)
   }
   function redo() {
-    cursor++
+    cursor = Math.min(stack.length, cursor + 1)
     changes = true
-    console.log('redo', cursor)
   }
 </script>
 
@@ -101,13 +108,8 @@
   :global(body) {
     margin: 0;
   }
-  
-  
+
   #screenEl {
     display: relative;
-    width: 400px;
-    height: 400px;
-
-    /* border: 1px solid black; */
   }
 </style>

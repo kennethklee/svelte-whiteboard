@@ -7,9 +7,8 @@ export class Base extends Fragment {
 
   constructor(w, h) {
     super()
-    this.width = w || this.width
-    this.height = h || this.height
-
+    this.width = this.canvas.width = w || this.width
+    this.height = this.canvas.height = h || this.height
     this.ctx = this.canvas.getContext('2d')
   }
 
