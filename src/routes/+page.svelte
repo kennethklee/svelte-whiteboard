@@ -155,8 +155,9 @@
 <canvas id="screenEl" width={WIDTH} height={HEIGHT}></canvas>
 
 <style>
-  :global(body) {
+  :global(html  body) {
     margin: 0;
+    overscroll-behavior: none;
   }
 
   #screenEl {
