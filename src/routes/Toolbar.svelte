@@ -18,14 +18,15 @@
     /* position: absolute; */
     display: flex;
     height: 24px;
+    left: calc(50% - 100px);
+    /* bottom: 0; */
 
     background: white;
 
     border: 1px solid grey;
     box-shadow: inset 0 0 3px rgba(24, 87, 96,.5);
 
-    /* bottom: 0; */
-    left: calc(50% - 100px);
+    white-space: nowrap;
   }
 
   label {

@@ -2,7 +2,7 @@
   import * as Y from 'yjs'
   import { WebrtcProvider } from 'y-webrtc'
   import { onMount } from 'svelte'
-  import { dev } from '$app/environment'
+  import { browser, dev } from '$app/environment'
   import Toolbar from './Toolbar.svelte'
   import { Base } from '$lib/drawing/base'
   import { Grid } from '$lib/drawing/grid'
@@ -128,10 +128,11 @@
   // This translates screen coords to canvas coords -- for simplicity, they are the same
   const getXY = (e) => ([e.pageX - screenEl.offsetLeft, e.pageY - screenEl.offsetTop])
 
+  const yDoc = new Y.Doc()
+  if (browser) new WebrtcProvider('svelte5-whiteboard', yDoc)
+  const yKEY = 'root'
+  
   onMount(() => {
-    const yDoc = new Y.Doc()
-    const provider = new WebrtcProvider('svelte5-whiteboard', yDoc)
-    const yKEY = $dev ? 'dev' : 'root'
     yRoot = yDoc.get(yKEY, Y.Map)
     yRoot.observe(sync)
 
