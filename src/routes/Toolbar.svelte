@@ -1,5 +1,5 @@
 <script>
-  let { tool = $bindable('point'), onundo, onredo } = $props()
+  let { tool = $bindable('point'), color = $bindable('black'), onundo, onredo } = $props()
 </script>
 
 <article>
@@ -11,13 +11,16 @@
   <vb />
   <button onclick={onundo}>undo</button>
   <button onclick={onredo}>redo</button>
+  <br />
+
+  <!-- <input type="color" bind:value={color} /> -->
 </article>
 
 <style>
   article {
     /* position: absolute; */
     display: flex;
-    height: 24px;
+    height: 48px;
     left: calc(50% - 100px);
     /* bottom: 0; */
 
@@ -25,12 +28,11 @@
 
     border: 1px solid grey;
     box-shadow: inset 0 0 3px rgba(24, 87, 96,.5);
-
-    white-space: nowrap;
   }
 
   label {
     text-transform: capitalize;
+    white-space: nowrap;
   }
 
   vb {

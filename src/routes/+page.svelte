@@ -11,11 +11,12 @@
   import { Shape } from '$lib/drawing/shape'
   import { deserializeStack, serializeStack } from './sync';
 
-  const WIDTH = 550
-  const HEIGHT = 550
+  const WIDTH = 450
+  const HEIGHT = 450
   const STACK_SIZE = 10
 
   // state
+  let color = 'black'
   let grid
   let base
   let cursor = 0 // position in stack
@@ -61,7 +62,7 @@
   function drawStart(x, y) {
     const build = TOOL_BUILDER[toolName]
     if (!build) throw new Error(`No tool named ${toolName}`)
-    tool = build(x, y, 'black')
+    tool = build(x, y, color)
     changes = true
   }
 
@@ -77,9 +78,6 @@
     stack.push(tool)
     
     yRoot.set(STACK_KEY, JSON.stringify(serializeStack(stack)))
-    // TODO trial of Y.Array
-    // yStack.delete(cursor, yStack.length)
-    // yStack.push(tool.serialize())
 
     if (stack.length > STACK_SIZE) {
       const frag = stack.shift()
@@ -152,7 +150,7 @@
   })
 </script>
 
-<Toolbar bind:tool={toolName} onundo={undo} onredo={redo} />
+<Toolbar bind:tool={toolName} bind:color={color} onundo={undo} onredo={redo} />
 <canvas id="screenEl" width={WIDTH} height={HEIGHT}></canvas>
 
 <style>
