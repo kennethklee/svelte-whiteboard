@@ -5,11 +5,11 @@
 <article>
   <div>
     <input type="color" bind:value={color} />
-    <label><input type="radio" bind:group={tool} value="path"> ✏️<span style="font-family: fantasy">S</span></label>
-    <label><input type="radio" bind:group={tool} value="line"> ✏️/</label>
-    <label><input type="radio" bind:group={tool} value="shape"> shape</label>
-    <label><input type="radio" bind:group={tool} value="rect"> ✏️[]</label>
-    <label><input type="radio" bind:group={tool} value="ellipse"> ✏️<span style="font-family: fantasy">O</span></label>
+    <label><input type="radio" bind:group={tool} value="path">draw</label>
+    <label><input type="radio" bind:group={tool} value="line">line</label>
+    <label><input type="radio" bind:group={tool} value="shape">shape</label>
+    <label><input type="radio" bind:group={tool} value="rect">rect</label>
+    <label><input type="radio" bind:group={tool} value="ellipse">circle</label>
   </div>
   <vb />
   <div>
@@ -32,12 +32,17 @@
   }
 
   label {
+    margin-right: 4px;
     text-transform: capitalize;
     white-space: nowrap;
   }
   input {
     vertical-align: sub;
   }
+  input[type="radio"] {
+    margin: 1px 2px 0px 1px;
+  }
+
   button {
     font-size: inherit;
     text-orientation: sideways;
@@ -47,6 +52,7 @@
     display: inline-block;
     height: 100%;
     width: 1px;
+    min-height: 32px;
     background: #aaaaaa;
     margin: 0 0.5rem;
   }
