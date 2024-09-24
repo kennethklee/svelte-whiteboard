@@ -20,8 +20,8 @@ export class Rect extends Fragment {
     const y = Math.min(this.point[1], this.toPoint[1])
     const w = Math.abs(this.toPoint[0] - this.point[0])
     const h = Math.abs(this.toPoint[1] - this.point[1])
-    ctx.beginPath()
     ctx.strokeStyle = this.colour
+    ctx.beginPath()
     ctx.rect(x, y, w, h)
     ctx.stroke()
   }

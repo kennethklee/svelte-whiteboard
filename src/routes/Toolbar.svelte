@@ -1,18 +1,5 @@
 <script>
-  import { onMount } from "svelte";
-
   let { tool = $bindable('point'), color = $bindable('#000000'), onundo, onredo } = $props()
-
-  onMount(() => {
-    color = document.querySelector('input[type=color]').value
-  })
-
-  const TOOL_EMOJI = {
-    pencil: '✏️',
-    shape: '⚪',
-    rect: '⬛',
-    line: '✎',
-  }
 </script>
 
 <article>
@@ -21,13 +8,13 @@
     <label><input type="radio" bind:group={tool} value="path"> ✏️<span style="font-family: fantasy">S</span></label>
     <label><input type="radio" bind:group={tool} value="line"> ✏️/</label>
     <label><input type="radio" bind:group={tool} value="shape"> shape</label>
-    <label><input type="radio" bind:group={tool} value="rect"> ✏️🛆</label>
+    <label><input type="radio" bind:group={tool} value="rect"> ✏️[]</label>
     <label><input type="radio" bind:group={tool} value="ellipse"> ✏️<span style="font-family: fantasy">O</span></label>
   </div>
   <vb />
   <div>
-    <button onclick={onundo}>undo</button>
-    <button onclick={onredo}>redo</button>
+    <button onclick={onundo}>↪️</button>
+    <button onclick={onredo}>↩️</button>
   </div>
 </article>
 

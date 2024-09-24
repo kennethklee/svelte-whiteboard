@@ -23,7 +23,6 @@ export class Ellipse extends Fragment {
 
     ctx.strokeStyle = this.colour
     ctx.beginPath()
-    ctx.strokeStyle = this.colour
     ctx.ellipse(x, y, w, h, 0, 0, 2 * Math.PI)
     ctx.stroke()
   }
