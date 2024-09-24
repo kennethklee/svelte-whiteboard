@@ -34,7 +34,7 @@
     background: white;
     border: 1px solid grey;
     box-shadow: inset 0 0 3px rgba(24, 87, 96,.5);
-    font-size: smaller;
+    font-size: 8pt;
   }
 
   label {
@@ -43,6 +43,9 @@
   }
   input {
     vertical-align: sub;
+  }
+  button {
+    font-size: inherit;
   }
 
   vb {

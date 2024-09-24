@@ -13,8 +13,8 @@
   import { Rect } from '$lib/drawing/rect'
   import { Ellipse } from '$lib/drawing/ellipse';
 
-  const WIDTH = 450
-  const HEIGHT = 450
+  const WIDTH = 350
+  const HEIGHT = 350
   const STACK_SIZE = 10
 
   // state
