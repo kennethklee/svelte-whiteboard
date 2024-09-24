@@ -1,5 +1,7 @@
+import { Ellipse } from "$lib/drawing/ellipse"
 import { Line } from "$lib/drawing/line"
 import { Path } from "$lib/drawing/path"
+import { Rect } from "$lib/drawing/rect"
 import { Shape } from "$lib/drawing/shape"
 
 export function serializeStack(stack) {
@@ -11,6 +13,8 @@ export function deserializeFragment(data) {
     case 'path': return Path.fromJSON(data)
     case 'line': return Line.fromJSON(data)
     case 'shape': return Shape.fromJSON(data)
+    case 'rect': return Rect.fromJSON(data)
+    case 'ellipse': return Ellipse.fromJSON(data)
   }
   throw new Error(`Could not deserialize fragment: ${data}`)
 }

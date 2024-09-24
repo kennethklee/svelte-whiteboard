@@ -1,15 +1,21 @@
 <script>
-  let { tool = $bindable('point'), color = $bindable('black'), onundo, onredo } = $props()
+  import { onMount } from "svelte";
+
+  let { tool = $bindable('point'), color = $bindable('#000000'), onundo, onredo } = $props()
+
+  onMount(() => {
+    color = document.querySelector('input[type=color]').value
+  })
 </script>
 
 <article>
   <div>
+    <input type="color" bind:value={color} />
     <label><input type="radio" bind:group={tool} value="path"> point</label>
     <label><input type="radio" bind:group={tool} value="line"> line</label>
     <label><input type="radio" bind:group={tool} value="shape"> shape</label>
-    <label><input type="radio" bind:group={tool} value="rect" disabled> rect</label>
-    <label><input type="radio" bind:group={tool} value="arc" disabled> circle</label>
-    <input type="color" bind:value={color} />
+    <label><input type="radio" bind:group={tool} value="rect"> rect</label>
+    <label><input type="radio" bind:group={tool} value="ellipse"> circle</label>
   </div>
   <vb />
   <div>

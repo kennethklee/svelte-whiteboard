@@ -9,14 +9,16 @@
   import { Line } from '$lib/drawing/line'
   import { Path } from '$lib/drawing/path'
   import { Shape } from '$lib/drawing/shape'
-  import { deserializeStack, serializeStack } from './sync';
+  import { deserializeStack, serializeStack } from './sync'
+  import { Rect } from '$lib/drawing/rect'
+  import { Ellipse } from '$lib/drawing/ellipse';
 
   const WIDTH = 450
   const HEIGHT = 450
   const STACK_SIZE = 10
 
   // state
-  let color = 'black'
+  let color = '#000000'
   let grid
   let base
   let cursor = 0 // position in stack
@@ -54,6 +56,8 @@
     path: (x, y, colour) => new Path([x, y], [[x, y]], colour),
     line: (x, y, colour) => new Line([x, y], [x, y], colour),
     shape: (x, y, colour) => new Shape([x, y], [[x, y]], colour),
+    rect: (x, y, colour) => new Rect([x, y], [x, y], colour),
+    ellipse: (x, y, colour) => new Ellipse([x, y], [x, y], colour),
   }
 
   let changes = true
@@ -136,7 +140,7 @@
 
     base = new Base(WIDTH, HEIGHT)
     grid = new Grid(WIDTH, HEIGHT)
-    const ctx = screenEl.getContext('2d')
+    const ctx = screenEl.getContext('2d', { willReadFrequency: true })
     screenEl.addEventListener('touchstart', ev => drawStart(...getXY(ev.touches[0])))
     screenEl.addEventListener('touchmove', ev => drawMove(...getXY(ev.touches[0])))
     screenEl.addEventListener('touchend', drawEnd)
