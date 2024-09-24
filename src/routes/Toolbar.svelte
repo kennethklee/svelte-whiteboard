@@ -6,16 +6,23 @@
   onMount(() => {
     color = document.querySelector('input[type=color]').value
   })
+
+  const TOOL_EMOJI = {
+    pencil: '✏️',
+    shape: '⚪',
+    rect: '⬛',
+    line: '✎',
+  }
 </script>
 
 <article>
   <div>
     <input type="color" bind:value={color} />
-    <label><input type="radio" bind:group={tool} value="path"> point</label>
-    <label><input type="radio" bind:group={tool} value="line"> line</label>
+    <label><input type="radio" bind:group={tool} value="path"> ✏️<span style="font-family: fantasy">S</span></label>
+    <label><input type="radio" bind:group={tool} value="line"> ✏️/</label>
     <label><input type="radio" bind:group={tool} value="shape"> shape</label>
-    <label><input type="radio" bind:group={tool} value="rect"> rect</label>
-    <label><input type="radio" bind:group={tool} value="ellipse"> circle</label>
+    <label><input type="radio" bind:group={tool} value="rect"> ✏️🛆</label>
+    <label><input type="radio" bind:group={tool} value="ellipse"> ✏️<span style="font-family: fantasy">O</span></label>
   </div>
   <vb />
   <div>
@@ -27,7 +34,7 @@
 <style>
   article {
     display: flex;
-    height: 32px;
+    min-height: 32px;
     left: calc(50% - 100px);
     line-height: 32px;
 
@@ -46,6 +53,7 @@
   }
   button {
     font-size: inherit;
+    text-orientation: sideways;
   }
 
   vb {
