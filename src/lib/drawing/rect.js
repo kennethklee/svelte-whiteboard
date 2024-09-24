@@ -3,7 +3,7 @@ import { Fragment } from './fragment'
 export class Rect extends Fragment {
   /**
    * @param {import('./fragment').Point} point
-   * @param {import('./fragment').Point} path
+   * @param {import('./fragment').Point} toPoint
    */
   constructor(point = [0, 0], toPoint = [0, 0], colour = 'black') {
     super()
@@ -26,6 +26,7 @@ export class Rect extends Fragment {
     ctx.stroke()
   }
 
+  /** @param {import('./fragment').Point} point */
   to(point) {
     this.toPoint = point
   }

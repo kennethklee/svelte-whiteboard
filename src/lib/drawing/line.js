@@ -23,6 +23,7 @@ export class Line extends Fragment {
     ctx.stroke()
   }
 
+  /** @param {import('./fragment').Point} point */
   to(point) {
     this.toPoint = point
   }

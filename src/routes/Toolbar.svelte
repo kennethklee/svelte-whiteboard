@@ -10,8 +10,8 @@
     <label><input type="radio" bind:group={tool} value="shape">shape</label>
     <label><input type="radio" bind:group={tool} value="rect">rect</label>
     <label><input type="radio" bind:group={tool} value="ellipse">circle</label>
+    <label><input type="radio" bind:group={tool} value="eraser">erase</label>
   </div>
-  <vb />
   <div>
     <button onclick={onundo}>↪️</button>
     <button onclick={onredo}>↩️</button>
@@ -30,6 +30,13 @@
     box-shadow: inset 0 0 3px rgba(24, 87, 96,.5);
     font-size: 8pt;
   }
+  article > div {
+    padding: 0 4px;
+  }
+
+  div + div {
+    border-left: #ddd solid 1px;
+  }
 
   label {
     margin-right: 4px;
@@ -46,14 +53,5 @@
   button {
     font-size: inherit;
     text-orientation: sideways;
-  }
-
-  vb {
-    display: inline-block;
-    height: 100%;
-    width: 1px;
-    min-height: 32px;
-    background: #aaaaaa;
-    margin: 0 0.5rem;
   }
 </style>

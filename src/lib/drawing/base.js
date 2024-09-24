@@ -2,19 +2,18 @@ import { Fragment } from './fragment'
 
 export class Base extends Fragment {
   canvas = document.createElement('canvas')
-  width = 100
-  height = 100
 
   constructor(w, h) {
     super()
-    this.width = this.canvas.width = w || this.width
-    this.height = this.canvas.height = h || this.height
+    this.canvas.width = w
+    this.canvas.height = h
     this.ctx = this.canvas.getContext('2d')
     if (!this.ctx) throw new Error('Could not get base 2d context')
   }
 
+  /** @param {CanvasRenderingContext2D} ctx Canvas 2d context */
   render(ctx) {
-    ctx.drawImage(this.canvas, 0, 0, this.width, this.height)
+    ctx.drawImage(this.canvas, 0, 0, this.canvas.width, this.canvas.height)
   }
 
   /** @param {Fragment} frag */
@@ -25,8 +24,8 @@ export class Base extends Fragment {
   toJSON() {
     return {
       type: 'base',
-      width: this.width,
-      height: this.height,
+      width: this.canvas.width,
+      height: this.canvas.height,
       blob: this.canvas.toDataURL('image/png'),
     }
   }

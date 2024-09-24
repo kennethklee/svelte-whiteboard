@@ -5,13 +5,13 @@
   import { browser, dev } from '$app/environment'
   import Toolbar from './Toolbar.svelte'
   import { Base } from '$lib/drawing/base'
-  import { Grid } from '$lib/drawing/grid'
   import { Line } from '$lib/drawing/line'
   import { Path } from '$lib/drawing/path'
   import { Shape } from '$lib/drawing/shape'
   import { deserializeStack, serializeStack } from './sync'
   import { Rect } from '$lib/drawing/rect'
   import { Ellipse } from '$lib/drawing/ellipse';
+  import { Eraser } from '$lib/drawing/eraser';
 
   const WIDTH = 350
   const HEIGHT = 350
@@ -19,7 +19,6 @@
 
   // state
   let color = '#000000'
-  let grid
   let base
   let cursor = 0 // position in stack
   let stack = []
@@ -58,6 +57,7 @@
     shape: (x, y, colour) => new Shape([x, y], [[x, y]], colour),
     rect: (x, y, colour) => new Rect([x, y], [x, y], colour),
     ellipse: (x, y, colour) => new Ellipse([x, y], [x, y], colour),
+    eraser: (x, y, colour) => new Eraser([x, y], [[x, y]], colour),
   }
 
   let changes = true
@@ -105,7 +105,6 @@
 
     // render
     ctx.reset()
-    grid.render(ctx)
     base.render(ctx)
     for (let i = 0; i < cursor; ++i) {
       stack[i].render(ctx)
@@ -139,7 +138,6 @@
     yRoot.observe(sync)
 
     base = new Base(WIDTH, HEIGHT)
-    grid = new Grid(WIDTH, HEIGHT)
     const ctx = screenEl.getContext('2d', { willReadFrequency: true })
     screenEl.addEventListener('touchstart', ev => drawStart(...getXY(ev.touches[0])))
     screenEl.addEventListener('touchmove', ev => drawMove(...getXY(ev.touches[0])))
@@ -165,5 +163,9 @@
 
   #screenEl {
     display: relative;
+
+    background-image: linear-gradient(45deg, #ddd 25%, transparent 25%), linear-gradient(-45deg, #ddd 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #ddd 75%), linear-gradient(-45deg, transparent 75%, #ddd 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
   }
 </style>

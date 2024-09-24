@@ -11,7 +11,7 @@ export class Fragment {
     throw new Error('Not implemented')
   }
 
-  /** @params {Point} */
+  /** @param {Point} point */
   to(point) {
     throw new Error('Not implemented')
   }

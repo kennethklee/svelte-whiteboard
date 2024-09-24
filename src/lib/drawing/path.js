@@ -17,6 +17,7 @@ export class Path extends Fragment {
   /** @param {CanvasRenderingContext2D} ctx Canvas 2d context */
   render(ctx) {
     ctx.strokeStyle = this.colour
+    ctx.beginPath()
     ctx.moveTo(...this.point)
     for (let i = 0; i < this.path.length - 1; ++i) {
       ctx.lineTo(...this.path[i])
@@ -24,6 +25,7 @@ export class Path extends Fragment {
     ctx.stroke()
   }
 
+  /** @param {import('./fragment').Point} point */
   to(point) {
     const lastPoint = this.path[this.path.length - 1]
     if (lastPoint && lastPoint[0] === point[0] && lastPoint[1] === point[1]) return
